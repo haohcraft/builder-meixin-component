@@ -18,27 +18,27 @@ module.exports = {
   cache: true,
   devtool: "source-map",
   entry: {
-    app: ["./demo/app.jsx"]
+    app: ["./demo/app.js"]
   },
   stats: {
     colors: true,
     reasons: true
   },
   resolve: {
-    extensions: ["", ".js", ".jsx"]
+    extensions: ["", ".js"]
   },
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.js?$/,
         exclude: [/node_modules/],
         // **Note**: Cannot use shorthand `"babel-loader"` or `"babel"` when
         // we are playing around with `NODE_PATH` in builder. Manually
         // resolve path.
         loader: require.resolve("babel-loader")
       }, {
-        test: /\.css$/,
-        loader: require.resolve("style-loader") + "!css"
+        test: /\.scss$/,
+        loader: require.resolve("style-loader") + "!sass"
       }, {
         test: /\.(png|jpg)$/,
         loader: require.resolve("url-loader") + "?limit=8192"

@@ -42,20 +42,21 @@ module.exports = {
     libraryTarget: "umd"
   },
   resolve: {
-    extensions: ["", ".js", ".jsx"]
+    extensions: ["", ".js", ".scss", ".json"],
+    modulesDirectories: ['node_modules']
   },
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.js?$/,
         exclude: [/node_modules/],
         // **Note**: Cannot use shorthand `"babel-loader"` or `"babel"` when
         // we are playing around with `NODE_PATH` in builder. Manually
         // resolve path.
         loader: require.resolve("babel-loader")
       }, {
-        test: /\.css$/,
-        loader: require.resolve("style-loader") + "!css"
+        test: /\.scss$/,
+        loader: require.resolve("style-loader") + "!sass?sourceMap"
       }, {
         test: /\.(png|jpg)$/,
         loader: require.resolve("url-loader") + "?limit=8192"
