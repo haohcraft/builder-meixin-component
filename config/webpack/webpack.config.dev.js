@@ -10,7 +10,7 @@ config.plugins = [
     new webpack.DefinePlugin({
         _DEVELOPMENT_: true,
         'process.env': {
-            NODE_ENV: JSON.stringify("development")
+            NODE_ENV: JSON.stringify("dev")
         }
     }),
     new webpack.SourceMapDevToolPlugin("[file].map")
