@@ -60,6 +60,9 @@ module.exports = {
       }, {
         test: /\.(png|jpg)$/,
         loader: require.resolve("url-loader") + "?limit=8192"
+      }, {
+          test: /\.json$/,
+          loader: require.resolve("json-loader")
       }
     ]
   },
