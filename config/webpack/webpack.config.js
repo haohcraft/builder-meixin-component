@@ -37,7 +37,7 @@ module.exports = {
   ],
   output: {
     path: path.join(ROOT, "dist"),
-    filename: libPath + ".min.js",
+    filename:  "[name].min.js",
     library: libName,
     libraryTarget: "umd"
   },
