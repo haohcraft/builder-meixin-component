@@ -25,7 +25,8 @@ module.exports = {
     reasons: true
   },
   resolve: {
-    extensions: ["", ".js"]
+    extensions: ["", ".js", ".scss", ".json"],
+    modulesDirectories: ['node_modules', 'src']
   },
   module: {
     loaders: [
@@ -38,7 +39,7 @@ module.exports = {
         loader: require.resolve("babel-loader")
       }, {
         test: /\.scss$/,
-        loader: require.resolve("style-loader") + "!sass"
+        loader: 'style!css!sass?sourceMap'
       }, {
         test: /\.(png|jpg)$/,
         loader: require.resolve("url-loader") + "?limit=8192"
