@@ -74,6 +74,7 @@ module.exports = {
       }
     }),
     new webpack.DefinePlugin({
+      _DEVELOPMENT_: false,
       // Signal production, so that webpack removes non-production code that
       // is in condtionals like: `if (process.env.NODE_ENV === "production")`
       "process.env.NODE_ENV": JSON.stringify("production")
