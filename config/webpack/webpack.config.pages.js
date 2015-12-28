@@ -38,7 +38,10 @@ config.module.loaders = [
 
 ];
    
-config.plugins.push(new ExtractTextPlugin('[name].min.css'));
+config.plugins.push(new ExtractTextPlugin('[name].min.css', {
+    disable: false,
+    allChunks: true
+}));
 config.plugins.push(new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.js"));
 // Export mutated base.
 module.exports = config;
