@@ -33,7 +33,10 @@ module.exports = {
   },
   resolve: {
     extensions: ["", ".js", ".scss", ".json"],
-    modulesDirectories: ['node_modules', 'src']
+    modulesDirectories: ['node_modules', 'src'],
+    alias: {
+      jquery: 'jquery/dist/jquery'
+    }
   },
   module: {
     loaders: [
