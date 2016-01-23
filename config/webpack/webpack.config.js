@@ -71,7 +71,6 @@ module.exports = {
       // Signal production, so that webpack removes non-production code that
       // is in condtionals like: `if (process.env.NODE_ENV === "production")`
       "process.env.NODE_ENV": JSON.stringify("production")
-    }),
-    new webpack.SourceMapDevToolPlugin("[file].map")
+    })
   ]
 };
