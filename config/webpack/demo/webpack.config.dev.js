@@ -1,6 +1,7 @@
 "use strict";
 
 var webpack = require("webpack");
+var BundleTracker = require('webpack-bundle-tracker');
 
 module.exports = {
 
@@ -11,8 +12,8 @@ module.exports = {
 
   output: {
     path: "./demo",
-    filename: "main.js",
-    publicPath: "/assets/"
+    filename: "main-[hash].js",
+    publicPath: "http://localhost:3000/assets/"
   },
 
   cache: true,
@@ -53,6 +54,7 @@ module.exports = {
             NODE_ENV: JSON.stringify("dev")
         }
     }),
+    new BundleTracker({filename: './meixin-components-webpack-stats-dev.json'}),
     new webpack.NoErrorsPlugin()
   ]
 };
