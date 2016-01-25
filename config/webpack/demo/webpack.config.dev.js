@@ -2,6 +2,7 @@
 
 var webpack = require("webpack");
 var BundleTracker = require('webpack-bundle-tracker');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 
@@ -12,14 +13,17 @@ module.exports = {
 
   output: {
     path: "./demo",
-    filename: "main-[hash].js",
+    filename: "[name].js",
     publicPath: "http://localhost:3000/assets/"
   },
 
   cache: true,
   devtool: "source-map",
   entry: {
-    app: ["./demo/app.js"]
+    'vendor': ['react', 'react-dom', 'lodash', 'moment'],
+    'home-topics': ["./demo/app-home-topics.js"],
+    'home': ["./demo/app-home.js"],
+    'markets': ["./demo/app-market.js"]
   },
   stats: {
     colors: true,
@@ -40,7 +44,7 @@ module.exports = {
         loader: require.resolve("babel-loader")
       }, {
         test: /\.scss$/,
-        loader: 'style!css!sass?sourceMap'
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
       }, {
         test: /\.(png|jpg)$/,
         loader: require.resolve("url-loader") + "?limit=8192"
@@ -48,6 +52,10 @@ module.exports = {
     ]
   },
   plugins: [
+    new ExtractTextPlugin('[name].css', {
+      disable: false,
+      allChunks: true
+    }),
     new webpack.DefinePlugin({
         _DEVELOPMENT_: true,
         'process.env': {
