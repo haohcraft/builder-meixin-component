@@ -5,6 +5,7 @@ var config = require("./webpack.config");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var readDir = require('readdir');
 var _ = require('lodash');
+var BundleTracker = require('webpack-bundle-tracker');
 
 // Replace with `__dirname` if using in project root.
 var ROOT = process.cwd();
@@ -37,10 +38,11 @@ config.module.loaders = [
     }
 
 ];
-config.plugins.push(new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.js"));
-config.plugins.push(new ExtractTextPlugin('[name].min.css', {
+config.plugins.push(new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor-[hash].js"));
+config.plugins.push(new ExtractTextPlugin('[name]-[hash].min.css', {
     disable: false,
     allChunks: true
 }));
+config.plugins.push(new BundleTracker({filename: './meixin-components-webpack-stats.json'}));
 // Export mutated base.
 module.exports = config;
