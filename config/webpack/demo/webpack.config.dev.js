@@ -21,9 +21,10 @@ module.exports = {
   devtool: "source-map",
   entry: {
     'vendor': ['react', 'react-dom', 'lodash', 'moment'],
-    'home-topics': ["./demo/app-home-topics.js"],
-    'home': ["./demo/app-home.js"],
-    'markets': ["./demo/app-market.js"]
+    'home-topics': ["./src/pages/home-topics.js"],
+    'home': ["./src/pages/home.js"],
+    'markets': ["./src/pages/markets.js"],
+    'home-market': ["./src/pages/home-market.js"]
   },
   stats: {
     colors: true,
