@@ -3,8 +3,15 @@
 var webpack = require("webpack");
 var BundleTracker = require('webpack-bundle-tracker');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var _ = require('lodash');
+var path = require("path");
+var readDir = require('readdir');
+// Replace with `__dirname` if using in project root.
+var ROOT = process.cwd();
+var req = readDir.readSync(path.join(ROOT, "src/pages"), ['*.js']);
+var config;
 
-module.exports = {
+config = {
 
   devServer: {
     contentBase: "./demo",
@@ -19,13 +26,6 @@ module.exports = {
 
   cache: true,
   devtool: "source-map",
-  entry: {
-    'vendor': ['react', 'react-dom', 'lodash', 'moment'],
-    'home-topics': ["./src/pages/home-topics.js"],
-    'home': ["./src/pages/home.js"],
-    'markets': ["./src/pages/markets.js"],
-    'home-market': ["./src/pages/home-market.js"]
-  },
   stats: {
     colors: true,
     reasons: true
@@ -67,3 +67,17 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ]
 };
+
+// each js file in src/pages/ is an entry file
+config.entry = _.reduce(req, function (result, n) {
+  var reg = n.match(/(\S+).js/i);
+  if (reg && reg.length) {
+    result[reg[1]] = path.join(ROOT, "src/pages", n);
+  }
+  return result;
+}, {});
+
+// include 3rd party libs into vendor
+config.entry.vendor = ['react', 'react-dom', 'lodash', 'moment'];
+
+module.exports = config;
